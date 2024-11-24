@@ -1,9 +1,15 @@
 'use client'
 
 import { useEffect, useState } from "react"
+import localFont from "next/font/local";
 
 import { LiaEye } from "react-icons/lia";
 import { LiaEyeSlash } from "react-icons/lia";
+
+const italiana = localFont({
+    src: "../fonts/Italiana-Regular.ttf",
+    variable: "--font-italiana"
+})
 
 interface InputParams {
     insideInputColor: string,
@@ -15,7 +21,7 @@ interface InputParams {
 export default function EtInput({inputType, placeHolder, insideInputColor, linesColor}: InputParams) {
 
     /* insideInputColor and linesColor are the variables which defines the input and 'placeholder' colors.
-       This variables must be in the HEX Colors format. 
+       These variables must be in the HEX Color format. 
        Eg.: #FFFFFF 
     */
 
@@ -28,16 +34,12 @@ export default function EtInput({inputType, placeHolder, insideInputColor, lines
     const preFocusInput: string = `bg-inherit`
     const posFocusInput: string = `border-none`
 
-
-    const preFocusCSSStyle = `margin`
-
-
     return(
-        <div className="flex flex-col">
+        <div className={`${italiana.className} font-semibold flex flex-col`}>
 
             <span 
-                style={!isFocused ? {backgroundColor: insideInputColor, color: linesColor} : {background: "none", color: linesColor}}
-                className={`z-10 w-fit rounded-md ${isFocused ? posFocusTextStyle : preFocusTextStyle} transition-all duration-500`}>{placeHolder}</span>
+                style={!isFocused ? {backgroundColor: insideInputColor,  color: linesColor} : {background: "none", color: linesColor}}
+                className={`z-10 w-fit px-3 rounded-md ${isFocused ? posFocusTextStyle : preFocusTextStyle} transition-all duration-500`}>{placeHolder}</span>
             
             <div className="relative">
                 <input
