@@ -5,6 +5,7 @@ import localFont from "next/font/local";
 
 import { LiaEye } from "react-icons/lia";
 import { LiaEyeSlash } from "react-icons/lia";
+import { kMaxLength } from "buffer";
 
 const italiana = localFont({
     src: "../fonts/Italiana-Regular.ttf",
@@ -12,13 +13,15 @@ const italiana = localFont({
 })
 
 interface InputParams {
-    insideInputColor: string,
-    linesColor: string,
-    placeHolder: string,
+    insideInputColor: string
+    linesColor: string
+    placeHolder: string
     inputType: "password"|"text"|"email"
+    minLength?: number
+    maxLength?: number
 }
 
-export default function EtInput({inputType, placeHolder, insideInputColor, linesColor}: InputParams) {
+export default function EtInput({inputType, placeHolder, insideInputColor, linesColor, minLength, maxLength}: InputParams) {
 
     /* insideInputColor and linesColor are the variables which defines the input and 'placeholder' colors.
        These variables must be in the HEX Color format. 
@@ -35,7 +38,7 @@ export default function EtInput({inputType, placeHolder, insideInputColor, lines
     const posFocusInput: string = `border-none`
 
     return(
-        <div className={`${italiana.className} font-semibold flex flex-col`}>
+        <div className={`w-[100%] font-semibold flex flex-col`}>
 
             <span 
                 style={!isFocused ? {backgroundColor: insideInputColor,  color: linesColor} : {background: "none", color: linesColor}}
@@ -43,8 +46,10 @@ export default function EtInput({inputType, placeHolder, insideInputColor, lines
             
             <div className="relative">
                 <input
+                    maxLength={maxLength}
+                    minLength={minLength}
                     style={!isFocused ? {background: 'inherit', borderColor: linesColor, color: linesColor} : {backgroundColor: linesColor, color: insideInputColor}}
-                    className={`border-solid border-[1px] px-[1rem] outline-none rounded-md h-[2.9rem] w-[25rem] ${isFocused ? posFocusInput : preFocusInput} transition-all duration-[1000ms]`}
+                    className={`border-solid border-[1px] px-[1rem] outline-none rounded-md h-[2.9rem] w-[100%] ${isFocused ? posFocusInput : preFocusInput} transition-all duration-[1000ms]`}
                     type={inputType == "password" && showPassword ? 'text' : inputType} 
                     name="" 
                     id="" 

@@ -22,7 +22,7 @@ export default function EtSubmit({outHoverColor, inHoverColor, placeHolder}: Sub
     const buttonStyleOnHover: string = "hover:border-none hover:animate-pulse hover:h-[3.2rem] hover:-translate-x-[5%] hover:w-[105%]"
 
     return(
-        <div className={`w-[100%] ${italiana.className} font-bold`}>
+        <div className={`w-[100%] font-bold`}>
             <button
                 style={onHover ? {backgroundColor: inHoverColor.button, color: inHoverColor.text} : {backgroundColor: outHoverColor.button, color: outHoverColor.text}}
                 onMouseEnter={() => setOnOhover(true)}
